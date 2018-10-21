@@ -1,0 +1,24 @@
+{
+  "name": "find-my-plate",
+  "version": "1.0.0",
+  "description": "A simple web app to connect people with lost/found car plate numbers",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hammady/find-my-plate.git"
+  },
+  "author": "Hossam Hammady <github@hammady.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hammady/find-my-plate/issues"
+  },
+  "homepage": "https://github.com/hammady/find-my-plate#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongodb": "^3.1.8"
+  }
+}
