@@ -22,7 +22,10 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.render('index')
+    adapter.total()
+    .then(function(total) {
+        res.render('index', {total: total})
+      })
   })
 
 app.get('/ping', (req, res) => {

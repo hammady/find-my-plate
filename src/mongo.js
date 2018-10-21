@@ -24,5 +24,9 @@ module.exports = {
         contact: contact,
         location: location
     })
+  },
+
+  total: function() {
+    return collection.count()
   }
 }
