@@ -23,10 +23,35 @@ app.get('/ping', (req, res) => {
     res.send('OK')
   })
 
-app.get('/search', (req, res) => {
-    res.send('TODO search')
-  })
+app.get('/search/:plate', (req, res) => {
+    const plate = req.params.plate
+    console.log(`Searching for plate ${plate}`)
+    adapter.search(
+        plate
+      )
+        .then(function (results) {
+          res.json({ results: results })
+        })
+        .catch(function (err) {
+          console.log(err)
+          res.status(500).json({ status: 'Error' })
+        })  })
   
-app.post('/report', (req, res) => {
-    res.send('TODO report')
+app.post('/report/:plate', (req, res) => {
+    const plate = req.params.plate
+    const contact = req.body.contact
+    const location = req.body.location
+    console.log(`Reporting plate ${plate}`)
+    adapter.report(
+        plate,
+        contact,
+        location
+      )
+        .then(function (ids) {
+          res.send('Thanks')
+        })
+        .catch(function (err) {
+          console.log(err)
+          res.status(500).json({ status: 'Error' })
+        })
   })
