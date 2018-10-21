@@ -36,7 +36,8 @@ app.get('/search', (req, res) => {
         plate
       )
         .then(function (results) {
-          res.json({ results: results })
+          console.log(`Found ${results.length} results for plate ${plate}`)
+          res.render('results', { plate: plate, results: results })
         })
         .catch(function (err) {
           console.log(err)
@@ -54,7 +55,7 @@ app.post('/report', (req, res) => {
         location
       )
         .then(function (ids) {
-          res.send('Thanks')
+          res.send(`Your report for plate ${plate} was received successfully. Thanks!`)
         })
         .catch(function (err) {
           console.log(err)

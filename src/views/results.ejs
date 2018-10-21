@@ -1,1 +1,40 @@
-<h1>Results</h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            Find My Plate Qatar
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <h1>Find My Plate Qatar</h1>
+        <div>
+            <h2>
+                Results for plate <%= plate %>
+            </h2>
+            <% if (results.length === 0) { %>
+                Sorry, no plates found!
+            <% } else { %>
+                <table border="1">
+                    <tr>
+                        <th>Contact</th>
+                        <th>Location</th>
+                    </tr>
+                    <% for(var i=0; i<results.length; i++) {%>
+                        <tr>
+                            <td><%= results[i].contact %></td>
+                            <td><%= results[i].location %></td>
+                        </tr>
+                    <% } %>
+                </table>
+            <% } %>
+        </div>
+        <p>
+            Developed by: Hossam Hammady (Twitter: <a href="https://twitter.com/hammady">@hammady</a>)
+        </p>
+        <p>
+            Under MIT open-source license.
+            GitHub: <a href="https://github.com/hammady/find-my-plate">https://github.com/hammady/find-my-plate</a>
+        </p>
+        </body>
+</html>
