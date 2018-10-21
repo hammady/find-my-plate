@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/hammady/find-my-plate#readme",
   "dependencies": {
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "mongodb": "^3.1.8"
   }

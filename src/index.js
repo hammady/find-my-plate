@@ -19,6 +19,12 @@ adapter.connect(urlObject)
 
 app.use(bodyParser.json({ limit: '100kb' }))
 
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res) => {
+    res.render('index')
+  })
+
 app.get('/ping', (req, res) => {
     res.send('OK')
   })
