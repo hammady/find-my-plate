@@ -1,1 +1,59 @@
-<h1>Find my plate</h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            Find My Plate Qatar
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            function validateReport() {
+                const input = document.getElementById('report-plate')
+                const value = input.value.trim()
+                if (value === '') {
+                    alert("Plate number is required")
+                    return false
+                }
+                input.value = value
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Find My Plate Qatar</h1>
+        <p>
+            Due to recent floods, many people lost their car plates.
+            Many also has reported on social media finding them.
+            This website aims at connecting them.
+        </p>
+
+        <div>
+            <h2>
+                Search for your lost plate by number
+            </h2>
+            <form method="GET" action="/search">
+                <label for="plate">Plate number:</label>
+                <input type="text" name="plate"/>
+                <input type="submit" value="Search"/>
+            </form>
+        </div>
+
+        <div>
+            <h2>
+                Report a found plate
+            </h2>
+            <form method="POST" action="/report" onsubmit="return validateReport()"
+            enctype="application/x-www-form-urlencoded">
+                <label for="plate">Plate number:</label>
+                <input type="text" name="plate" id="report-plate"/><br/>
+                <label for="plate">Contact number (optional):</label>
+                <input type="text" name="contact"/><br/>
+                <label for="plate">Location (optional):</label>
+                <input type="text" name="location"/><br/>
+                <input type="submit" value="Report"/>
+            </form>
+        </div>
+
+        <p>
+            Developed by: Hossam Hammady (Twitter: <a href="https://twitter.com/hammady">@hammady</a>)
+        </p>
+    </body>
+</html>

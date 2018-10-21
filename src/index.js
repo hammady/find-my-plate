@@ -17,7 +17,7 @@ adapter.connect(urlObject)
     process.exit(1)
   })
 
-app.use(bodyParser.json({ limit: '100kb' }))
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.set('view engine', 'ejs');
 
@@ -29,8 +29,8 @@ app.get('/ping', (req, res) => {
     res.send('OK')
   })
 
-app.get('/search/:plate', (req, res) => {
-    const plate = req.params.plate
+app.get('/search', (req, res) => {
+    const plate = req.query.plate
     console.log(`Searching for plate ${plate}`)
     adapter.search(
         plate
@@ -43,8 +43,8 @@ app.get('/search/:plate', (req, res) => {
           res.status(500).json({ status: 'Error' })
         })  })
   
-app.post('/report/:plate', (req, res) => {
-    const plate = req.params.plate
+app.post('/report', (req, res) => {
+    const plate = req.body.plate
     const contact = req.body.contact
     const location = req.body.location
     console.log(`Reporting plate ${plate}`)
