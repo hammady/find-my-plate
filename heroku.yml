@@ -1,0 +1,7 @@
+setup:
+  addons:
+    - plan: mongolab
+    - plan: logentries
+build:
+  docker:
+    web: Dockerfile
