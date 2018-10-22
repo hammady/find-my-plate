@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= lang %>">
     <head>
         <title>
             Find My Plate Qatar
@@ -28,12 +28,12 @@
             }
         </style>
     </head>
-    <body dir=<%= dir %>>
+    <body dir="<%= dir %>">
         <p>
             <ul>
-                <li>English</li>
-                <li>العربية</li>
-                <li>اردو</li>
+                <li><a href="/?language=en">English</a></li>
+                <li><a href="/?language=ar">العربية</a></li>
+                <li><a href="/?language=ur">اردو</a></li>
             </ul>
         </p>
         <br/>
