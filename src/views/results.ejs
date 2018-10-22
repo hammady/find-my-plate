@@ -2,7 +2,7 @@
 <html lang="<%= l.lang %>">
     <head>
         <title>
-            Find My Plate Qatar
+          <%= l.title %>
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/styles.css" />
@@ -16,27 +16,27 @@
           </ul>
       </p>
       <br/>
-      <h1>Find My Plate Qatar</h1>
+      <h1><%= l.title %></h1>
         <div>
             <h2>
-                Results for plate <%= plate %>
+                <%= l.results_header %> <%= plate %>
             </h2>
             <% if (results.length === 0) { %>
                 <p>
-                    Sorry, no plates found! Please check back later or leave your contact number for anyone reporting the same to call you.
+                    <%= l.not_found %>
                 </p>
-                <form method="POST" action="/register" onsubmit="return validateRegister()"
+                <form method="POST" action="/register?language=<%= l.lang %>" onsubmit="return validateRegister()"
                 enctype="application/x-www-form-urlencoded">
                     <input type="hidden" name="plate" value="<%= plate %>"/>
                     <input type="text" name="contact"/>
-                    <input type="submit" value="Register"/>
+                    <input type="submit" value="<%= l.register %>"/>
                 </form>
 
             <% } else { %>
                 <table border="1">
                     <tr>
-                        <th>Contact</th>
-                        <th>Location</th>
+                        <th><%= l.contact_number %></th>
+                        <th><%= l.location %></th>
                     </tr>
                     <% for(var i=0; i<results.length; i++) {%>
                         <tr>
@@ -47,6 +47,7 @@
                 </table>
             <% } %>
         </div>
+        <hr/>
         <p>
             Developed by: Hossam Hammady (Twitter: <a href="https://twitter.com/hammady">@hammady</a>)
         </p>

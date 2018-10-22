@@ -58,7 +58,7 @@ app.get('/search', (req, res) => {
       )
         .then(function (results) {
           console.log(`Found ${results.length} results for plate ${plate}`)
-          res.render('results', { plate: plate, results: results })
+          res.render('results', { plate: plate, results: results, l: loadLanguage(req.language) })
         })
         .catch(function (err) {
           console.log(err)
@@ -69,6 +69,7 @@ app.post('/report', (req, res) => {
     const plate = req.body.plate
     const contact = req.body.contact
     const location = req.body.location
+    const l = loadLanguage(req.language)
     console.log(`Reporting plate ${plate}`)
     adapter.report(
         plate,
@@ -76,7 +77,7 @@ app.post('/report', (req, res) => {
         location
       )
         .then(function () {
-          var msg = `Your report for plate ${plate} was received successfully. Thanks!`
+          var msg = `${l.report_received} (${l.plate_number} ${plate})`
           adapter.searchRegistrations(plate)
           .then(function(results) {
             if (results.length > 0) {
@@ -86,8 +87,7 @@ app.post('/report', (req, res) => {
               }
               contacts = contacts.join(', ')
               console.log(`Found matching registrations: ${contacts}`)
-              msg += ` Someone searched for this plate, please contact them in case they don't check back later: ` +
-                contacts + '.'
+              msg += ` ${l.found_registrations} ${contacts}.`
             }
             res.send(msg)
           })
@@ -105,13 +105,14 @@ app.post('/report', (req, res) => {
   app.post('/register', (req, res) => {
     const plate = req.body.plate
     const contact = req.body.contact
+    const l = loadLanguage(req.language)
     console.log(`Registering plate ${plate}`)
     adapter.register(
         plate,
         contact
       )
         .then(function () {
-          res.send(`Your registration for plate ${plate} was received successfully. Anyone reporting the same will see your contact number.`)
+          res.send(`${l.registration_received} (${l.plate_number}: ${plate}).`)
         })
         .catch(function (err) {
           console.log(err)

@@ -2,7 +2,7 @@
 <html lang="<%= l.lang %>">
     <head>
         <title>
-            Find My Plate Qatar
+            <%= l.title %>
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script>
@@ -10,7 +10,7 @@
                 const input = document.getElementById('report-plate')
                 const value = input.value.trim()
                 if (value === '') {
-                    alert("Plate number is required")
+                    alert("<%= l.plate_required %>")
                     return false
                 }
                 input.value = value
@@ -27,45 +27,45 @@
             </ul>
         </p>
         <br/>
-        <h1>Find My Plate Qatar</h1>
+        <h1><%= l.title %></h1>
         <p>
-            Due to recent floods, many people lost their car plates.
-            Many also has reported on social media finding them.
-            This website aims at connecting them.
+            <%= l.intro %>
         </p>
 
         <div>
             <h2>
-                Total number of reported plates: <%= total %>
+                <%= l.total_reported %> <%= total %>
             </h2>
         </div>
+        <hr/>
         <div>
             <h2>
-                Search for your lost plate by number
+                <%= l.search_header %>
             </h2>
             <form method="GET" action="/search">
-                <label for="plate">Plate number:</label>
+                <label for="plate"><%= l.plate_number %></label>
                 <input type="text" name="plate"/>
-                <input type="submit" value="Search"/>
+                <input type="hidden" name="language" value="<%= l.lang %>"/>
+                <input type="submit" value="<%= l.search %>"/>
             </form>
         </div>
 
         <div>
             <h2>
-                Report a found plate
+                <%= l.report_header %>
             </h2>
-            <form method="POST" action="/report" onsubmit="return validateReport()"
+            <form method="POST" action="/report?language=<%= l.lang %>" onsubmit="return validateReport()"
             enctype="application/x-www-form-urlencoded">
-                <label for="plate">Plate number:</label>
+                <label for="plate"><%= l.plate_number %></label>
                 <input type="text" name="plate" id="report-plate"/><br/>
-                <label for="plate">Contact number (optional):</label>
+                <label for="plate"><%= l.contact_number %> <%= l.optional %>:</label>
                 <input type="text" name="contact"/><br/>
-                <label for="plate">Location (optional):</label>
+                <label for="plate"><%= l.location %> <%= l.optional %>:</label>
                 <input type="text" name="location"/><br/>
-                <input type="submit" value="Report"/>
+                <input type="submit" value="<%= l.report %>"/>
             </form>
         </div>
-
+        <hr/>
         <p>
             Developed by: Hossam Hammady (Twitter: <a href="https://twitter.com/hammady">@hammady</a>)
         </p>

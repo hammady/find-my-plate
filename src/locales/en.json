@@ -1,4 +1,22 @@
 {
   "lang": "en",
-  "dir": "ltr"
+  "dir": "ltr",
+  "plate_required": "Plate number is required",
+  "title": "Find My Plate Qatar",
+  "intro": "Due to recent floods, many people lost their car plates. Many also has reported on social media finding them. This website aims at connecting them.",
+  "total_reported": "Total number of reported plates:",
+  "search_header": "Search for your lost plate by number",
+  "plate_number": "Plate number:",
+  "search": "Search",
+  "report_header": "Report a found plate",
+  "contact_number": "Contact number",
+  "location": "Location",
+  "optional": "(optional)",
+  "report": "Report",
+  "results_header": "Results for plate",
+  "not_found": "Sorry, no plates found! Please check back later or leave your contact number for anyone reporting the same to see it.",
+  "register": "Register",
+  "report_received": "Your report was received successfully. Thanks!",
+  "found_registrations": "Someone searched for this plate, please contact them in case they don't check back later:",
+  "registration_received": "Your registration was received successfully. Anyone reporting the same will see your contact number"
 }
