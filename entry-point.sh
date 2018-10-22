@@ -1,5 +1,4 @@
 #!/bin/bash
-set -xe
-ls /app
+set -e
 /app/wait-for-it.sh mongo:27017 -s -t 10
 exec "$@"
