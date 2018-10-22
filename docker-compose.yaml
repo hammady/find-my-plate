@@ -7,5 +7,9 @@ services:
     - MONGODB_URI=mongodb://mongo:27017/find-my-plate
     ports:
     - "3000:3000"
+    entrypoint: /app/entry-point.sh
+    command:
+    - npm
+    - start
   mongo:
     image: mongo:latest
