@@ -8,6 +8,16 @@ const urlObject = (new URL(databaseURL))
 const protocol = urlObject.protocol
 const adapter = require('./mongo')
 const requestLanguage = require('express-request-language')
+const fs = require('fs')
+const languages = {}
+
+const loadLanguage = function(code) {
+  if (!languages[code]) {
+    const contents = fs.readFileSync(`/app/locales/${code}.json`)
+    eval(`languages[code] = ${contents}`)
+  }
+  return languages[code]
+}
 
 adapter.connect(urlObject)
   .then(function () {
@@ -32,8 +42,7 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
   adapter.total()
   .then(function(total) {
-    const dir = req.language === 'en' ? 'ltr' : 'rtl'
-    res.render('index', {total: total, lang: req.language, dir: dir})
+    res.render('index', {total: total, l: loadLanguage(req.language)})
   })
 })
 

@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= l.lang %>">
     <head>
         <title>
             Find My Plate Qatar
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-        <h1>Find My Plate Qatar</h1>
         <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body dir="<%= l.dir %>">
+      <p>
+          <ul>
+              <li><a href="/?language=en">English</a></li>
+              <li><a href="/?language=ar">العربية</a></li>
+              <li><a href="/?language=ur">اردو</a></li>
+          </ul>
+      </p>
+      <br/>
+      <h1>Find My Plate Qatar</h1>
         <div>
             <h2>
                 Results for plate <%= plate %>
