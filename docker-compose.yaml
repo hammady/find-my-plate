@@ -11,5 +11,7 @@ services:
     command:
     - npm
     - start
+    depends_on:
+    - mongo
   mongo:
     image: mongo:latest

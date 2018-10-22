@@ -16,8 +16,27 @@
                 input.value = value
             }
         </script>
+        <style>
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+            li {
+                float: left;
+                margin-right: 10px;
+            }
+        </style>
     </head>
-    <body>
+    <body dir=<%= dir %>>
+        <p>
+            <ul>
+                <li>English</li>
+                <li>العربية</li>
+                <li>اردو</li>
+            </ul>
+        </p>
+        <br/>
         <h1>Find My Plate Qatar</h1>
         <p>
             Due to recent floods, many people lost their car plates.
@@ -27,7 +46,7 @@
 
         <div>
             <h2>
-                Total number of reported plates: <%= total %> 
+                Total number of reported plates: <%= total %>
             </h2>
         </div>
         <div>

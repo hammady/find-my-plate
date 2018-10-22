@@ -7,6 +7,7 @@ const { URL } = require('url')
 const urlObject = (new URL(databaseURL))
 const protocol = urlObject.protocol
 const adapter = require('./mongo')
+const requestLanguage = require('express-request-language')
 
 adapter.connect(urlObject)
   .then(function () {
@@ -19,18 +20,24 @@ adapter.connect(urlObject)
 
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+app.use(requestLanguage({
+  languages: ['en', 'ar'],
+  queryName: 'language'
+}))
+
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    adapter.total()
-    .then(function(total) {
-        res.render('index', {total: total})
-      })
+  adapter.total()
+  .then(function(total) {
+    const dir = req.language === 'en' ? 'ltr' : 'rtl'
+    res.render('index', {total: total, lang: req.language, dir: dir})
   })
+})
 
 app.get('/ping', (req, res) => {
-    res.send('OK')
-  })
+  res.send('OK')
+})
 
 app.get('/search', (req, res) => {
     const plate = req.query.plate
@@ -46,7 +53,7 @@ app.get('/search', (req, res) => {
           console.log(err)
           res.status(500).json({ status: 'Error' })
         })  })
-  
+
 app.post('/report', (req, res) => {
     const plate = req.body.plate
     const contact = req.body.contact
