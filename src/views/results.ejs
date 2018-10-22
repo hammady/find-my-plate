@@ -13,7 +13,16 @@
                 Results for plate <%= plate %>
             </h2>
             <% if (results.length === 0) { %>
-                Sorry, no plates found!
+                <p>
+                    Sorry, no plates found! Please check back later or leave your contact number for anyone reporting the same to call you.
+                </p>
+                <form method="POST" action="/register" onsubmit="return validateRegister()"
+                enctype="application/x-www-form-urlencoded">
+                    <input type="hidden" name="plate" value="<%= plate %>"/>
+                    <input type="text" name="contact"/>
+                    <input type="submit" value="Register"/>
+                </form>
+
             <% } else { %>
                 <table border="1">
                     <tr>

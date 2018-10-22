@@ -57,8 +57,43 @@ app.post('/report', (req, res) => {
         contact,
         location
       )
-        .then(function (ids) {
-          res.send(`Your report for plate ${plate} was received successfully. Thanks!`)
+        .then(function () {
+          var msg = `Your report for plate ${plate} was received successfully. Thanks!`
+          adapter.searchRegistrations(plate)
+          .then(function(results) {
+            if (results.length > 0) {
+              var contacts = []
+              for(var i=0; i<results.length; i++) {
+                contacts.push(results[i].contact)
+              }
+              contacts = contacts.join(', ')
+              console.log(`Found matching registrations: ${contacts}`)
+              msg += ` Someone searched for this plate, please contact them in case they don't check back later: ` +
+                contacts + '.'
+            }
+            res.send(msg)
+          })
+          .catch(function (err) {
+            console.log(err)
+            res.status(500).json({ status: 'Error' })
+          })
+        })
+        .catch(function (err) {
+          console.log(err)
+          res.status(500).json({ status: 'Error' })
+        })
+  })
+
+  app.post('/register', (req, res) => {
+    const plate = req.body.plate
+    const contact = req.body.contact
+    console.log(`Registering plate ${plate}`)
+    adapter.register(
+        plate,
+        contact
+      )
+        .then(function () {
+          res.send(`Your registration for plate ${plate} was received successfully. Anyone reporting the same will see your contact number.`)
         })
         .catch(function (err) {
           console.log(err)

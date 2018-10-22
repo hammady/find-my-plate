@@ -1,6 +1,6 @@
 const mongo = require('mongodb')
 const ObjectID = mongo.ObjectID
-var db, collection
+var db, platesCollection, contactsCollection
 
 module.exports = {
   connect: function (urlObject) {
@@ -10,23 +10,35 @@ module.exports = {
       .then(function (client) {
         console.log('Connected to mongodb at', host)
         db = client.db()
-        collection = db.collection('plates')
+        platesCollection = db.collection('plates')
+        contactsCollection = db.collection('contacts')
     })
   },
 
   search: function (plate) {
-    return collection.find({plate: plate}).toArray()
+    return platesCollection.find({plate: plate}).toArray()
   },
 
   report: function (plate, contact, location) {
-    return collection.insertOne({
+    return platesCollection.insertOne({
         plate: plate,
         contact: contact,
         location: location
     })
   },
 
+  register: function (plate, contact) {
+    return contactsCollection.insertOne({
+        plate: plate,
+        contact: contact
+    })
+  },
+
+  searchRegistrations: function (plate) {
+    return contactsCollection.find({plate: plate}).toArray()
+  },
+
   total: function() {
-    return collection.count()
+    return platesCollection.count()
   }
 }
