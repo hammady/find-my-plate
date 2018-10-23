@@ -26,10 +26,10 @@ div.main-content.masthead {
   padding-top: 8rem;
   padding-bottom: 8rem;
   min-height: 90%;
-  min-width: 1024px;
+  /* min-width: 1024px;
   width: 100%;
   height: auto;
-  position: fixed;
+  position: fixed; */
 }
 
 div.main-content.masthead .overlay {
@@ -141,8 +141,11 @@ div.main-content.masthead h1 {
 footer.footer {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  position: absolute;
   bottom: 0;
   right: 0;
   width: 100%;
+}
+
+.col-md-6.floating{
+  padding-bottom:40px
 }
