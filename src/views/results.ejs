@@ -1,58 +1,132 @@
 <!DOCTYPE html>
 <html lang="<%= l.lang %>">
-    <head>
-        <title>
-          <%= l.title %>
-        </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body dir="<%= l.dir %>">
-      <p>
-          <ul>
-              <li><a href="/?language=en">English</a></li>
-              <li><a href="/?language=ar">العربية</a></li>
-          </ul>
-      </p>
-      <br/>
-      <h1><%= l.title %></h1>
-        <div>
-            <h2>
-                <%= l.results_header %> <%= plate %>
-            </h2>
-            <% if (results.length === 0) { %>
-                <p>
-                    <%= l.not_found %>
-                </p>
-                <form method="POST" action="/register?language=<%= l.lang %>" onsubmit="return validateRegister()"
-                enctype="application/x-www-form-urlencoded">
-                    <input type="hidden" name="plate" value="<%= plate %>"/>
-                    <input type="text" name="contact"/>
-                    <input type="submit" value="<%= l.register %>"/>
-                </form>
 
-            <% } else { %>
-                <table border="1">
-                    <tr>
-                        <th><%= l.contact_number %></th>
-                        <th><%= l.location %></th>
-                    </tr>
-                    <% for(var i=0; i<results.length; i++) {%>
-                        <tr>
-                            <td><%= results[i].contact %></td>
-                            <td><%= results[i].location %></td>
-                        </tr>
-                    <% } %>
-                </table>
-            <% } %>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title><%= l.title %></title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+    type="text/css">
+
+
+  <!-- Custom styles for this template -->
+  <link href="css/landing-page.css" rel="stylesheet">
+
+</head>
+
+<body dir="<%= l.dir %>">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/?language=<%= l.lang %>"><%= l.title %></a>
+      <div class="floating">
+
+
+        <a class="btn btn-primary" href="/?language=en">English</a>
+        <a class="btn btn-primary" href="/?language=ar">العربية</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Masthead -->
+  <div class="main-content masthead text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h3 class="mb-5"> <%= l.results_header %> <span id="search-text"> <%= plate %> </span>
+          </h3>
         </div>
-        <hr/>
-        <p>
-            Developed by: Hossam Hammady (Twitter: <a href="https://twitter.com/hammady">@hammady</a>)
-        </p>
-        <p>
-            Under MIT open-source license.
-            GitHub: <a href="https://github.com/hammady/find-my-plate">https://github.com/hammady/find-my-plate</a>
-        </p>
-        </body>
+      </div>
+      <% if (results.length === 0) { %>
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h5 class="mb-5"> <%= l.not_found %>
+          </h5>
+        </div>
+
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <form method="POST" action="/register?language=<%= l.lang %>" onsubmit="return validateRegister()"
+            enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="plate" value="<%= plate %>"/>
+            <div class="form-row plate">
+              <div class="col-12 col-md-12 mb-2 mb-md-0">
+                <input type="text" class="form-control form-control-lg" placeholder="<%= l.contact_number %>" name="contact">
+              </div>
+              <br />
+              <div class="col-12 col-md-12">
+                <button type="submit" class="btn btn-block btn-lg btn-primary"><%= l.register %></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <% } else { %>
+      <div class="row">
+        <div class="mx-auto" style="margin-top:50px;">
+          <div class="limiter" style="min-width: 300px">
+            <div class="table100 ver1 m-b-110">
+              <div class="table100-head">
+                <table>
+                  <thead>
+                    <tr class="row100 head">
+                      <th class="cell100 column1"><%= l.contact_number %></th>
+                      <th class="cell100 column2"><%= l.location %></th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="table100-body js-pscroll">
+                <table>
+                  <tbody>
+                    <% for(var i=0; i<results.length; i++) {%>
+                    <tr class="row100 body">
+                      <td class="cell100 column1"><%= results[i].contact || '--' %></td>
+                      <td class="cell100 column2"><%= results[i].location || '--' %></td>
+                    </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+
+        <!-- Footer -->
+        <footer class="footer bg-light">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-5 h-100 text-center text-lg-left my-auto">
+                <p class="text-muted small mb-4 mb-lg-0">&copy; Developed by <a href="http://twitter.com/hammady">Hossam Hammady</a>. Special thanks to <a href="http://twitter.com/Alaa_Hamoudah">Alaa Hamoudah</a> for the design.</p>
+              </div>
+              <div class="col-lg-7 h-100 text-center text-lg-left my-auto">
+                <p class="text-muted small mb-4 mb-lg-0"> Under MIT open-source license. GitHub:
+                  <a href="https://github.com/hammady/find-my-plate">https://github.com/hammady/find-my-plate</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
 </html>

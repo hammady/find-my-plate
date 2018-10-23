@@ -1,76 +1,130 @@
 <!DOCTYPE html>
 <html lang="<%= l.lang %>">
-    <head>
-        <title>
-            <%= l.title %>
-        </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script>
-            function validateReport() {
-                const input = document.getElementById('report-plate')
-                const value = input.value.trim()
-                if (value === '') {
-                    alert("<%= l.plate_required %>")
-                    return false
-                }
-                input.value = value
-            }
-        </script>
-        <link rel="stylesheet" href="/styles.css" />
-    </head>
-    <body dir="<%= l.dir %>">
-        <p>
-            <ul>
-                <li><a href="/?language=en">English</a></li>
-                <li><a href="/?language=ar">العربية</a></li>
-            </ul>
-        </p>
-        <br/>
-        <h1><%= l.title %></h1>
-        <p>
-            <%= l.intro %>
-        </p>
 
-        <div>
-            <h2>
-                <%= l.total_reported %> <%= total %>
-            </h2>
-        </div>
-        <hr/>
-        <div>
-            <h2>
-                <%= l.search_header %>
-            </h2>
-            <form method="GET" action="/search">
-                <label for="plate"><%= l.plate_number %></label>
-                <input type="text" name="plate"/>
-                <input type="hidden" name="language" value="<%= l.lang %>"/>
-                <input type="submit" value="<%= l.search %>"/>
-            </form>
-        </div>
+  <head>
 
-        <div>
-            <h2>
-                <%= l.report_header %>
-            </h2>
-            <form method="POST" action="/report?language=<%= l.lang %>" onsubmit="return validateReport()"
-            enctype="application/x-www-form-urlencoded">
-                <label for="plate"><%= l.plate_number %></label>
-                <input type="text" name="plate" id="report-plate"/><br/>
-                <label for="plate"><%= l.contact_number %> <%= l.optional %>:</label>
-                <input type="text" name="contact"/><br/>
-                <label for="plate"><%= l.location %> <%= l.optional %>:</label>
-                <input type="text" name="location"/><br/>
-                <input type="submit" value="<%= l.report %>"/>
-            </form>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><%= l.title %></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <script>
+      function validateRequired(inputId) {
+          const input = document.getElementById(inputId)
+          const value = input.value.trim()
+          if (value === '') {
+              alert("<%= l.plate_required %>")
+              input.focus()
+              return false
+          }
+          input.value = value
+      }
+    </script>
+
+  </head>
+
+  <body dir="<%= l.dir %>">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-light static-top">
+      <div class="container">
+        <a class="navbar-brand" href="/?language=<%= l.lang %>"><%= l.title %></a>
+        <div class="floating">
+
+
+        <a class="btn btn-primary" href="/?language=en">English</a>
+        <a class="btn btn-primary" href="/?language=ar">العربية</a>
+      </div>
+      </div>
+    </nav>
+
+    <!-- Masthead -->
+    <div class="main-content masthead text-white text-center">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <h5 class="mb-5"><%= l.intro %></h5>
+          </div>
+          <div class="col-xl-9 mx-auto">
+              <h3 class="mb-5"> <%= l.total_reported %> <span id="reports-count"> <%= total %> </span>
+              </h3>
+            </div>
+              <div class="col-md-6 col-xl-6" style="margin-bottom: 59px;">
+                  <h5 class="margin-bottom-less"><%= l.search_header %></h5>
+                  <form method="GET" action="/search" onsubmit="return validateRequired('search-plate')">
+                    <div class="form-row plate">
+                      <div class="col-12 col-md-12 mb-2 mb-md-0">
+                        <input type="text" class="form-control form-control-lg" placeholder="<%= l.plate_number %>" name="plate" id="search-plate">
+                        <input type="hidden" name="language" value="<%= l.lang %>"/>
+                      </div>
+                      <br/>
+                      <div class="col-12 col-md-12">
+                        <button type="submit" class="btn btn-block btn-lg btn-primary"><%= l.search %></button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="col-md-6   floating">
+                    <h5 margin-bottom><%= l.report_header %></h5>
+                    <form method="POST" action="/report?language=<%= l.lang %>" onsubmit="return validateRequired('report-plate')"
+                      enctype="application/x-www-form-urlencoded">
+                      <div class="form-row plate">
+                        <div class="col-12 col-md-12 mb-2 mb-md-0">
+                          <input type="text" class="form-control form-control-lg" placeholder="<%= l.plate_number %>" name="plate" id="report-plate">
+                        </div>
+                        <div class="col-12 col-md-12 mb-2 mb-md-0">
+                            <input type="text" class="form-control form-control-lg" placeholder="<%= l.contact_number %> <%= l.optional %>" name="contact">
+                          </div>
+                          <div class="col-12 col-md-12 mb-2 mb-md-0">
+                              <input type="text" class="form-control form-control-lg" placeholder="<%= l.location %> <%= l.optional %>" name="location">
+                            </div>
+                        <div class="col-12 col-md-12">
+                          <button type="submit" class="btn btn-block btn-lg btn-primary"><%= l.report %></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+
+
         </div>
-        <hr/>
-        <p>
-            Developed by: Hossam Hammady (Twitter: <a href="https://twitter.com/hammady">@hammady</a>)
-        </p>
-        <p>
-            Under MIT open-source license.
-            GitHub: <a href="https://github.com/hammady/find-my-plate">https://github.com/hammady/find-my-plate</a>
-        </p>
-    </body>
+      </div>
+    </div>
+
+
+     <!-- Footer -->
+     <footer class="footer bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 h-100 text-center text-lg-left my-auto">
+            <p class="text-muted small mb-4 mb-lg-0">&copy; Developed by <a href="http://twitter.com/hammady">Hossam Hammady</a>. Special thanks to <a href="http://twitter.com/Alaa_Hamoudah">Alaa Hamoudah</a> for the design.</p>
+          </div>
+          <div class="col-lg-7 h-100 text-center text-lg-left my-auto">
+            <p class="text-muted small mb-4 mb-lg-0">    Under MIT open-source license. GitHub:
+              <a href="https://github.com/hammady/find-my-plate">https://github.com/hammady/find-my-plate</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
 </html>

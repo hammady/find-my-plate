@@ -89,7 +89,7 @@ app.post('/report', (req, res) => {
               console.log(`Found matching registrations: ${contacts}`)
               msg += ` ${l.found_registrations} ${contacts}.`
             }
-            res.send(msg)
+            res.render('simple', {message: msg, l: loadLanguage(req.language)})
           })
           .catch(function (err) {
             console.log(err)
@@ -112,7 +112,8 @@ app.post('/report', (req, res) => {
         contact
       )
         .then(function () {
-          res.send(`${l.registration_received} (${l.plate_number}: ${plate}).`)
+          const msg = `${l.registration_received} (${l.plate_number}: ${plate}).`
+          res.render('simple', {message: msg, l: loadLanguage(req.language)})
         })
         .catch(function (err) {
           console.log(err)
