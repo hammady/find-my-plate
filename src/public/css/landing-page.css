@@ -21,7 +21,7 @@ h6 {
 div.main-content.masthead {
   position: relative;
   background-color: #343a40;
-  background: url("/img/bg-masthead.jpg") no-repeat center center;
+  background: url("/img/bg-dohaskyline.jpg") no-repeat center center;
   background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
@@ -51,7 +51,6 @@ div.main-content.masthead .overlay {
   margin-bottom: 12px;
 }
 .mb-5{
-  color: #114b92;
   margin-bottom: 5rem!important;
 }
 
@@ -123,7 +122,7 @@ div.main-content.masthead h1 {
 .call-to-action {
   position: relative;
   background-color: #343a40;
-  background: url("/img/bg-masthead.jpg") no-repeat center center;
+  background: url("/img/bg-dohaskyline.jpg") no-repeat center center;
   background-size: cover;
   padding-top: 7rem;
   padding-bottom: 7rem;
