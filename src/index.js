@@ -31,7 +31,7 @@ adapter.connect(urlObject)
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use(requestLanguage({
-  languages: ['en', 'ar'],
+  languages: ['en', 'ar', 'ur'],
   queryName: 'language'
 }))
 
